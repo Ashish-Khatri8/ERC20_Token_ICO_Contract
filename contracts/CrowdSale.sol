@@ -138,21 +138,13 @@ contract CrowdSale is Ownable, ReentrancyGuard {
 
         if (_stage == SaleStages.PreSale) {
             maxTokens = tokensAvailableForStage[SaleStages.PreSale];
-        }
-
-        if (_stage == SaleStages.SeedSale) {
+        } else if (_stage == SaleStages.SeedSale) {
             maxTokens = (
                 tokensAvailableForStage[SaleStages.PreSale] +
                 tokensAvailableForStage[SaleStages.SeedSale]
             );
-        }
-
-        if (_stage == SaleStages.FinalSale) {
-            maxTokens = (
-                tokensAvailableForStage[SaleStages.PreSale] +
-                tokensAvailableForStage[SaleStages.SeedSale] +
-                tokensAvailableForStage[SaleStages.FinalSale]
-            );
+        } else if (_stage == SaleStages.FinalSale) {
+            maxTokens = totalTokensToSell;
         }
 
         return maxTokens - tokensSold;
