@@ -43,6 +43,35 @@ The wei that contract receives for tokens sold is sent to the beneficiary accoun
 
 If a purchaser sends more Wei than enough to buy all the remaining tokens of the current stage, then the remaining/ extra wei is sent back to the purchaser.
 
+### How Token Price is calculated:-
+
+- 1 ether price = 300000 cents
+- 1 ether = 10**18 wei
+
+=> 1 wei price = 300000 / 10**18 cents (i)
+
+Now, our ERC20 token also has 18 decimal places.
+
+- 1 token price = 15 cents
+- 1 token = 10**18 tokenBits
+
+=> 1 tokenBit price = 15/ 10**18 cents (ii)
+
+Now, on dividing (i) by (ii):
+
+- 1 wei/ 1 tokenBit = (300000 * 10**18)/ (15 * 10**18)
+
+=> Both 10**18 in numerator and denominator cancel each other out and we are left with:
+
+- 1 wei/ 1 tokenBit = 300000/ 15
+
+=> 1 wei/ 1 tokenBit = pricePerEtherInCents/ pricePerTokenInCents
+
+=> 1 wei = (pricePerEtherInCents/ pricePerTokenInCents) * 1 tokenBit
+
+Thus, formula for calculating how much tokens to send to purchaser for amount of wei received is:
+> (pricePerEtherInCents * weiSent) / pricePerTokenInCents
+
 ### Basic Sample Hardhat Project
 
 This project demonstrates a basic Hardhat use case.
