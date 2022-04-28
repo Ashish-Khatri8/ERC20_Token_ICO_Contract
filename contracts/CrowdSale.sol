@@ -55,6 +55,9 @@ contract CrowdSale is Ownable, ReentrancyGuard {
             "CrowdSale: beneficiary cannot be null address"
         );
 
+        // Set saleStage to PreSale
+        saleStage = SaleStages.PreSale;
+
         token = _token;
         beneficiary = payable(_beneficiary);
         pricePerEtherInCents = _pricePerEther;
@@ -84,7 +87,7 @@ contract CrowdSale is Ownable, ReentrancyGuard {
         saleStage = currentSaleStage();
 
         // Check wei required to buy all available tokens for current stage.
-        uint256 availableTokens = availableTokensForStage(saleStage);
+        uint256 availableTokens = availableTokensForCurrentStage();
         uint256 weiRequired = (pricePerTokenForStage[saleStage] * availableTokens) / pricePerEtherInCents;
         
         uint256 returnAmount;
@@ -108,6 +111,10 @@ contract CrowdSale is Ownable, ReentrancyGuard {
         if (returnAmount > 0) {
             payable(msg.sender).transfer(returnAmount);
             emit SaleStageFinished(saleStage, block.timestamp);
+
+            // Update the saleStage to next stage.
+            if (saleStage != SaleStages.FinalSale)
+                saleStage = SaleStages(uint8(saleStage) + 1);
         }
 
         // Transfer the wei received to beneficiary account.
@@ -119,21 +126,12 @@ contract CrowdSale is Ownable, ReentrancyGuard {
     }
 
     function currentSaleStage() public view returns(SaleStages _stage) {
-        uint256 tokensAvailable;
-        tokensAvailable = tokensAvailableForStage[SaleStages.PreSale];
-
-        if (tokensSold < tokensAvailable)
-            return SaleStages.PreSale;
-        
-        tokensAvailable += tokensAvailableForStage[SaleStages.SeedSale];
-
-        if (tokensSold < tokensAvailable)
-            return SaleStages.SeedSale;
-        
-        return SaleStages.FinalSale;
+        return saleStage;
     }
 
-    function availableTokensForStage(SaleStages _stage) public view returns(uint256) {
+    function availableTokensForCurrentStage() public view returns(uint256) {
+        SaleStages _stage = currentSaleStage();
+
         uint256 maxTokens;
 
         if (_stage == SaleStages.PreSale) {
