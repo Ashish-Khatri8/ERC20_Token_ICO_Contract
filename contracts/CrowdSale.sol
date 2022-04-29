@@ -84,7 +84,6 @@ contract CrowdSale is Ownable, ReentrancyGuard {
         );
 
         uint256 weiReceived = msg.value;
-        saleStage = currentSaleStage();
 
         // Check wei required to buy all available tokens for current stage.
         uint256 availableTokens = availableTokensForCurrentStage();
