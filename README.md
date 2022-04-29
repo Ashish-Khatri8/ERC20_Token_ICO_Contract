@@ -9,9 +9,9 @@ This contract deploys an ERC20 token with the following details.
 - Decimals: 18
 - Total Supply: 100 million => 10**8 => 100000000
 
-- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0xdbb280a379c4c981B79336c9860B1B0512969f64) at:
+- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0x2B4E922D918E66e40f428381A75CFf5CCbEcca43) at:
 
-> 0xdbb280a379c4c981B79336c9860B1B0512969f64
+> 0x2B4E922D918E66e40f428381A75CFf5CCbEcca43
 
 100% of total supply => 100 million tokens are sent to the CrowdSale contract in order to be sold in three different stages: PreSale, SeedSale and FinalSale.
 
@@ -19,9 +19,9 @@ This contract deploys an ERC20 token with the following details.
 
 This contract sells the tokens received in three different stages at different prices.
 
-- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0x98D6C04238E09001e51B73dBcdF56879bA5aa4Cf) at:
+- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0x59D89e5648981517E04699e68f39761472f57703) at:
 
-> 0x98D6C04238E09001e51B73dBcdF56879bA5aa4Cf
+> 0x59D89e5648981517E04699e68f39761472f57703
 
 - SaleStages: PreSale, SeedSale, FinalSale
 
