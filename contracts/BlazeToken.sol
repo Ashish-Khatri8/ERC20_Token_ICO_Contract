@@ -7,6 +7,6 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract BlazeToken is Ownable, ERC20 {
     constructor(uint256 supply, string memory name, string memory symbol) 
         ERC20(name, symbol) {
-            _mint(owner(), supply * 10**decimals());
+            _mint(owner(), supply * 10**9);
     }
 }
