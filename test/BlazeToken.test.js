@@ -29,7 +29,7 @@ describe("BlazeToken", () => {
 
     it("Sets correct initial supply", async () => {
         const totalSupply = await blazeToken.totalSupply();
-        expect(totalSupply/10**18).to.equal(tokenSupply);
+        expect(totalSupply/10**9).to.equal(tokenSupply);
     });
 
     it("Mints all tokens to owner", async () => {
