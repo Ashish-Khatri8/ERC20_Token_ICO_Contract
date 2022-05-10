@@ -6,12 +6,12 @@ This contract deploys an ERC20 token with the following details.
 
 - Name: "BlazeK"
 - Symbol: "BLZ"
-- Decimals: 18
+- Decimals: 9
 - Total Supply: 100 million => 10**8 => 100000000
 
-- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0x2B4E922D918E66e40f428381A75CFf5CCbEcca43) at:
+- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0xB8024F57322A00D55269CEa0D5B1Aee4Da9979F2) at:
 
-> 0x2B4E922D918E66e40f428381A75CFf5CCbEcca43
+> 0xB8024F57322A00D55269CEa0D5B1Aee4Da9979F2
 
 100% of total supply => 100 million tokens are sent to the CrowdSale contract in order to be sold in three different stages: PreSale, SeedSale and FinalSale.
 
@@ -19,9 +19,9 @@ This contract deploys an ERC20 token with the following details.
 
 This contract sells the tokens received in three different stages at different prices.
 
-- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0x59D89e5648981517E04699e68f39761472f57703) at:
+- Contract deployed on [rinkeby test network](https://rinkeby.etherscan.io/address/0xf22b13F41FF82B22c7b9770Eac0D23904D57B333) at:
 
-> 0x59D89e5648981517E04699e68f39761472f57703
+> 0xf22b13F41FF82B22c7b9770Eac0D23904D57B333
 
 - SaleStages: PreSale, SeedSale, FinalSale
 
@@ -50,27 +50,28 @@ If a purchaser sends more Wei than enough to buy all the remaining tokens of the
 
 => 1 wei price = 300000 / 10**18 cents (i)
 
-Now, our ERC20 token also has 18 decimal places.
+Now, our ERC20 token 9 decimal places.
 
 - 1 token price = 15 cents
-- 1 token = 10**18 tokenBits
+- 1 token = 10**9 tokenBits
 
-=> 1 tokenBit price = 15/ 10**18 cents (ii)
+=> 1 tokenBit price = 15/ 10**9 cents (ii)
 
 Now, on dividing (i) by (ii):
 
-- 1 wei/ 1 tokenBit = (300000 * 10**18)/ (15 * 10**18)
+- 1 wei/ 1 tokenBit = (300000 * 10**9) / (15 * 10**18)
 
-=> Both 10**18 in numerator and denominator cancel each other out and we are left with:
+- 1 wei/ 1 tokenBit = 300000/ (15 * 10**9)
 
-- 1 wei/ 1 tokenBit = 300000/ 15
+=> 1 wei/ 1 tokenBit = pricePerEtherInCents/ (pricePerTokenInCents * 10**9)
 
-=> 1 wei/ 1 tokenBit = pricePerEtherInCents/ pricePerTokenInCents
+=> 1 wei = (pricePerEtherInCents/ (pricePerTokenInCents * 10**9)) * 1 tokenBit
 
-=> 1 wei = (pricePerEtherInCents/ pricePerTokenInCents) * 1 tokenBit
+Thus, formula for calculating how much tokenBits to send to purchaser for amount of wei received is:
+> (pricePerEtherInCents * weiSent) / (pricePerTokenInCents * 10**9)
 
-Thus, formula for calculating how much tokens to send to purchaser for amount of wei received is:
-> (pricePerEtherInCents * weiSent) / pricePerTokenInCents
+And, formula for calculating how much wei it would take to buy a particular amount of tokenBits is:
+> (pricePerTokenInCents * 10**9 * tokenBitsToBuy) / pricePerEtherInCents
 
 ### Basic Sample Hardhat Project
 
