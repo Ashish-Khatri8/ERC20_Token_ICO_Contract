@@ -87,7 +87,7 @@ contract CrowdSale is Ownable, ReentrancyGuard {
 
         // Check wei required to buy all available tokens for current stage.
         uint256 availableTokens = availableTokensForCurrentStage();
-        uint256 weiRequired = (pricePerTokenForStage[saleStage] * availableTokens) / pricePerEtherInCents;
+        uint256 weiRequired = (pricePerTokenForStage[saleStage] * availableTokens * 10**9) / pricePerEtherInCents;
         
         uint256 returnAmount;
         uint256 tokensToSend;
@@ -98,7 +98,7 @@ contract CrowdSale is Ownable, ReentrancyGuard {
             tokensToSend = availableTokens;
         } else {
             weiRequired = weiReceived;
-            tokensToSend = (pricePerEtherInCents * weiRequired) / pricePerTokenForStage[saleStage];
+            tokensToSend = (pricePerEtherInCents * weiRequired) / (pricePerTokenForStage[saleStage] * 10**9);
         }
 
         // Transfer the tokens to the purchaser.
