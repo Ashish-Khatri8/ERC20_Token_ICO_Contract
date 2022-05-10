@@ -59,7 +59,7 @@ Now, our ERC20 token 9 decimal places.
 
 Now, on dividing (i) by (ii):
 
-- 1 wei/ 1 tokenBit = (300000 *10**9) / (15 *10**18)
+- 1 wei/ 1 tokenBit = (300000 * 10^9) / (15 * 10^18)
 
 - 1 wei/ 1 tokenBit = 300000/ (15 * 10**9)
 
